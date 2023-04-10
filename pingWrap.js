@@ -97,8 +97,12 @@ export async function pingServer(address, count = 1) {
         };
     }
     // console.log(data);
-    const ip = data.stdout.match(/\(?(\d{1,3}(?:\.\d{1,3}){3})\)?:/)[1];
-    const pingTime = data.stdout.match(/time=(\d*(?:\.\d+)?)\s?ms/)[1];
+    const ipv4 = data.stdout.match(/ \(?(\d{1,3}(?:\.\d{1,3}){3})\)?: /);
+    const ipv6 = data.stdout.match(
+        / \(?((?:[0-9a-fA-F]{4})?(?::{1,2}[0-9a-fA-F]{1,4}){0,7}(?:::)?)\)?: /
+    );
+    const ip = ipv4?.[1] ?? ipv6[1];
+    const pingTime = data.stdout.match(/time=(\d*(?:\.\d+)?) ?ms/)[1];
     return {
         failed: false,
         time: time,
