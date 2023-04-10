@@ -47,4 +47,10 @@ export const addresses = [
         interval: 5,
         offset: 3,
     },
+    {
+        name: "Hypixel Website",
+        address: "hypixel.net",
+        interval: 5,
+        offset: 4,
+    },
 ];
